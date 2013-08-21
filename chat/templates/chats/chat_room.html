@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<html>
+<head>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ <script type="text/javascript" src="{% static "jquery.gracefulWebSocket.js" %}"></script>
+ <script type="text/javascript">
+    $(document).ready( function() {
+    window.chat = {};
+    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/");
+    chat.send = function (message) {
+      chat.ws.send(message);
+    }
+
+    chat.ws.onmessage = function (event) {
+      var messageFromServer = event.data;
+      var list_element = document.createElement('li');
+      list_element.innerHTML = messageFromServer;
+      $("#message_list ul").prepend(list_element);
+    };
+
+    var inputBox = document.getElementById("inputbox");
+
+    inputbox.addEventListener("keydown", function(e) {
+      if (!e) { var e = window.event; }
+
+      if (e.keyCode == 13) { 
+        e.preventDefault(); // sometimes useful
+        chat.send(inputbox.value);  
+        inputbox.value="";
+      }
+    }, false);
+
+    });
+ </script>
+</head>
+
+<h1>{{ chat.name }}</h1>
+<textarea name="term" id="inputbox" cols="40" rows="4"></textarea>
+<div id="message_list">
+   <ul>
+{% for message in chat.message_set.all %}
+      <li>{{message.posted_date}}: {{ message.contents }}</li>
+{% endfor %}
+   </ul>
+</div>
+
+</html>
