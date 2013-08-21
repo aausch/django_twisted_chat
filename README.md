@@ -13,4 +13,4 @@ Make sure to create a chat room through django's admin interface (localhost:8080
 
 Note that I'm relying on the websockets branch of twisted, so make sure to install that (I don't think it's merged into the main branch yet)
 
-Start the twisted chat app with something like "twistd -y chatserver.py"
+Start the twisted chat app with something like "twistd -y chatserver.py", though probably "twistd -n -y chatserver.py" is more appropriate since you're likely not going to use this for production at any time
