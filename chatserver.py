@@ -1,7 +1,8 @@
-"""The most basic chat protocol possible.
+"""a basic chat protocol, using websockets.
 
 run me with twistd -y chatserver.py, and then connect with multiple
-telnet clients to port 1025
+websocket clients to port 1025
+
 """
 
 from twisted.protocols import basic
