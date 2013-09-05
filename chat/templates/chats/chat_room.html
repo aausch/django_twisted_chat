@@ -6,7 +6,7 @@
  <script type="text/javascript">
     $(document).ready( function() {
     window.chat = {};
-    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/");
+    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/ws");
     chat.send = function (message) {
       chat.ws.send(message);
     }

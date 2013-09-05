@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<html>
+<head>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ <script type="text/javascript" src="{% static "long_poll.js" %}"></script>
+</head>
+
+<h1>{{ chat.name }}</h1>
+<textarea name="term" id="inputbox" cols="40" rows="4"></textarea>
+<div id="message_list">
+   <ul>
+{% for message in chat.message_set.all %}
+      <li>{{message.posted_date}}: {{ message.contents }}</li>
+{% endfor %}
+   </ul>
+</div>
+
+</html>
