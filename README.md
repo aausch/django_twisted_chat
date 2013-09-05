@@ -17,8 +17,8 @@
 
 To see the chat service in action: 
 * a list of existing chat rooms is at localhost:8000/chats
-* chat over websockets at localhost:8000/chats/<room_id>
-* chat over HTTP, with a long-polling service, at localhost:8000/chats/long_poll/<room_id>
+* chat over websockets at localhost:8000/chats/[room_id]
+* chat over HTTP, with a long-polling service, at localhost:8000/chats/long_poll/[room_id]
 
 **DEPENDENCIES**
 
