@@ -1,6 +1,8 @@
+#convenience variable, to refer to the directory the application is currently running in:
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Django settings for django_twisted_chat project.
 
 DEBUG = True
@@ -125,10 +127,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'chat',
-    # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 

@@ -8,11 +8,8 @@
 <h1>{{ chat.name }}</h1>
 <textarea name="term" id="inputbox" cols="40" rows="4"></textarea>
 <div id="message_list">
-   <ul>
-{% for message in chat.message_set.all %}
-      <li>{{message.posted_date}}: {{ message.contents }}</li>
-{% endfor %}
-   </ul>
+  <ul>
+  </ul>
 </div>
 
 </html>
