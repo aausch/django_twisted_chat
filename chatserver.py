@@ -6,6 +6,8 @@ from twisted.web.resource import Resource
 from twisted.internet import task
 from twisted.web.server import NOT_DONE_YET
 
+write_lock = thread.allocate_lock() #forcing synchronized writes between the various kinds of clients
+
 class WebsocketChat(basic.LineReceiver):
 
     def connectionMade(self):
@@ -19,7 +21,9 @@ class WebsocketChat(basic.LineReceiver):
     
 
     def dataReceived(self, data):
+        write_lock.acquire()
         self.factory.messages[float(time.time())] = data
+        write_lock.release()
         self.updateClients(data)
 
     def updateClients(self, data):
@@ -60,7 +64,9 @@ class HttpChat(Resource):
         loopingCall.start(self.throttle, False)
  
         #share the list of messages between the factories of the two protocols
+        write_lock.acquire()
         self.wsFactory.messages = self.messages
+        write_lock.release()
         # initialize parent
         Resource.__init__(self)
  
@@ -68,7 +74,9 @@ class HttpChat(Resource):
         request.setHeader('Content-Type', 'application/json')
         args = request.args
         if 'new_message' in args:
+            write_lock.acquire()
             self.messages[float(time.time())] = args['new_message'][0]
+            write_lock.release()
             if len(self.wsFactory.clients) > 0:
                 self.wsFactory.clients[0].updateClients(args['new_message'][0])
             self.processDelayedRequests()
