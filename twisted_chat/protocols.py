@@ -1,9 +1,9 @@
 import time
+
 from twisted.protocols import basic
 
+
 class WebsocketChat(basic.LineReceiver):
-
-
     def connectionMade(self):
         print "Got new client!"
         self.transport.write('connected ....\n')
@@ -12,7 +12,6 @@ class WebsocketChat(basic.LineReceiver):
     def connectionLost(self, reason):
         print "Lost a client!"
         self.factory.clients.remove(self)
-
 
     def dataReceived(self, data):
         self.factory.messages[float(time.time())] = data

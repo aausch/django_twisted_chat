@@ -1,8 +1,9 @@
-import json, time
+import json
+import time
+
 from twisted.web.resource import Resource
 from twisted.internet import task
 from twisted.web.server import NOT_DONE_YET
-
 
 from twisted_chat.factories import ChatFactory
 
@@ -71,7 +72,10 @@ class HttpChat(Resource):
     def getData(self, request):         
         for published_at in sorted(self.messages):               
             if published_at > request.lastupdate:
-                return type('obj', (object,), {'published_at' : published_at, "message": self.messages[published_at]})(); 
+                return type('obj', (object,), {
+                        'published_at' : published_at,
+                              "message": self.messages[published_at]
+                        })(); 
         return
        
     def processDelayedRequests(self):
