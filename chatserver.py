@@ -1,5 +1,3 @@
-import thread
-
 from twisted.web.websockets import WebSocketsResource, WebSocketsProtocol, lookupProtocolForFactory
 from twisted.web.resource import Resource
 from twisted.web.server import Site
@@ -8,11 +6,9 @@ from twisted.application import service, internet
 
 from twisted_chat.factories import ChatFactory
 from twisted_chat.resources import HttpChat
-from twisted_chat.utility import WriteProtectedDict
 
 
-write_lock = thread.allocate_lock() #used to synchronize writes between the various protocols/clients
-shared_messages = WriteProtectedDict(write_lock)
+shared_messages = {}
 
 resource = HttpChat(shared_messages)
 factory = Site(resource)
