@@ -1,15 +1,8 @@
+{% extends "chats/base_chat.html" %}
 {% load staticfiles %}
-<html>
-<head>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script type="text/javascript" src="{% static "long_poll.js" %}"></script>
-</head>
+{% block header %}
+{{ block.super }}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static "long_poll.js" %}"></script>
+{% endblock %}
 
-<h1>{{ chat.name }}</h1>
-<textarea name="term" id="inputbox" cols="40" rows="4"></textarea>
-<div id="message_list">
-  <ul>
-  </ul>
-</div>
-
-</html>

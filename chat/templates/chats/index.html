@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ block.super }}
 {% if chat_list %}
     <ul>
     {% for chat in chat_list %}
@@ -7,3 +11,4 @@
 {% else %}
     <p>No chats are available.</p>
 {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block header %}
+<script>
+    function redirect(){
+       window.location.href = "/";
+    }
+
+    setTimeout(redirect, 2000);
+</script>
+{% endblock %}
+
+{% block content %}
+<h2> Logging out ... </h2>
+{% endblock %}
