@@ -20,31 +20,29 @@ $(document).ready(function(){
 });
  
 var getData = function() {
-    setTimeout(function() {
-        $.ajax({
-            type: "GET",
-            // set the destination for the query
-            url: 'http://127.0.0.1:1025?lastupdate='+lastupdate,
-            dataType: 'jsonp',
-            // needs to be set to true to avoid browser loading icons
-            async: true,
-            cache: false,
-            timeout:1000,
-            // process a successful response
-            success: function(response) {
-                // append the message list with the new message
-                var message = response.data;
-                $("#message_list ul").prepend($('<li>'+message+'</li>'));
-                // set lastupdate
-                lastupdate = response.timestamp;
-            },
-            complete: getData(lastupdate),
-            error: function(err) {
-                if (err.statusText !== "timeout") 
-                  console.log("unexpected error: " + err);
-            },
-	});
-    }, 1500);
+    $.ajax({
+        type: "GET",
+        // set the destination for the query
+        url: 'http://127.0.0.1:1025?lastupdate='+lastupdate,
+        dataType: 'jsonp',
+        // needs to be set to true to avoid browser loading icons
+        async: true,
+        cache: false,
+        timeout:1000,
+        // process a successful response
+        success: function(response) {
+            // append the message list with the new message
+            var message = response.data;
+            $("#message_list ul").prepend($('<li>'+message+'</li>'));
+            // set lastupdate
+            lastupdate = response.timestamp;
+        },
+        complete: getData,
+        error: function(err) {
+            if (err.statusText !== "timeout") 
+                console.log("unexpected error: " + err);
+        },
+    });
 };
  
 var postData = function(data) {
