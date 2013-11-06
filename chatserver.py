@@ -42,4 +42,4 @@ django_root = WsgiRoot(django_resource)
 project_dir = os.getcwd()
 django_root.putChild('static', StaticFileScanner(project_dir + "/chat/static", project_dir + "/django_twisted_chat/static"))
 
-internet.TCPServer(8080, Site(django_root)).setServiceParent(application)
+internet.TCPServer(8000, Site(django_root)).setServiceParent(application)
