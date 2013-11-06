@@ -1,8 +1,10 @@
 import json
 import time
 
-from twisted.web.resource import Resource
 from twisted.internet import task
+
+from twisted.web.resource import Resource
+from twisted.web.static import File
 from twisted.web.server import NOT_DONE_YET
 
 from twisted_chat.factories import ChatFactory
@@ -98,3 +100,20 @@ class HttpChat(Resource):
             return request.jsonpcallback+'('+response+')'
         else:
             return response
+        
+        
+class StaticFileScanner(Resource):
+    dirs = []
+    def __init__(self, *dirs):
+        if (len(dirs) < 1):
+            self.dirs = [File()]
+        else:
+            self.dirs = [File(d) for d in dirs]
+        Resource.__init__(self)
+    
+    def getChild(self, *args):
+        for d in self.dirs:
+            if d.getChild(*args) != d.childNotFound:
+                return d.getChild(*args)
+        return self.dirs[0].childNotFound
+    
