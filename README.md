@@ -1,5 +1,8 @@
-**Partially implemented chat server.**
+DEPRECATED, NOT MAINTAINED
+-
 
+
+**Partially implemented chat server.**
 
 
 (An experiment in using twisted with websockets, with a site served by Django.)
