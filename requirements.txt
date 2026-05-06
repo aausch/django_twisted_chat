@@ -1,2 +1,2 @@
 Django==2.2.24
-Twisted==22.10.0
+Twisted==26.4.0rc2
